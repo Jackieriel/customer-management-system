@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Routing\RouteGroup;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
+
+
+Route::get('/', [App\Http\Controllers\CustomerController::class, 'index']);
+Route::get('/customer/{id}', [App\Http\Controllers\CustomerController::class, 'getCustomerById']);
+Route::post('/add-customers', [App\Http\Controllers\CustomerController::class, 'addCustomer'])->name('addCustomer');
+Route::put('/update-customers', [App\Http\Controllers\CustomerController::class, 'updateCustomer'])->name('updateCustomer');
+Route::delete('/deleteCustomer/{id}', [App\Http\Controllers\CustomerController::class, 'deleteCustomer'])->name('deleteCustomer');
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
